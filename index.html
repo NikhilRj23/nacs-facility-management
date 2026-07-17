@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NACS Facility Management</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        /* Updated corporate palette extracted from the logo colors */
+        --logo-primary: #3f3a8b;
+        /* The rich deep indigo/blue from your logo */
+        --primary-color: #299bf5;
+        /* Signature active blue */
+        --secondary-color: #0077b6;
+        /* Darker deep slate blue */
+        --accent-yellow: #f4ea3c;
+        /* Warm highlight accent yellow */
+        --dark-color: #2b2b36;
+        /* Soft charcoal instead of harsh black for body text */
+        --light-bg: #f8f9fa;
+        --testi-dark-bg: #1e1b24;
+        --testi-card-blue: #299bf5;
+        --footer-bg: #111111;
+        --footer-text: #a8a8a8;
+        --footer-heading: #ffffff;
+      }
+
+      /* Specific styling for the Brand text to match the logo perfectly */
+      .brand-text {
+        color: var(--logo-primary) !important;
+        font-weight: 700;
+        font-size: 1.35rem;
+        letter-spacing: -0.3px;
+      }
+
+      /* Softened navigation links to match the brand aesthetic */
+      .nav-link {
+        font-weight: 500;
+        color: #555565 !important;
+        /* Muted corporate slate blue-grey instead of black */
+        position: relative;
+        padding: 0.5rem 1rem !important;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 1rem;
+        background-color: var(--logo-primary);
+        /* Active line matches the brand theme */
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: calc(100% - 2rem);
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--logo-primary) !important;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        color: #495057;
+        overflow-x: hidden;
+        background-color: #ffffff;
+      }
+
+      /* Smooth Navigation Styling */
+      .navbar {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        background-color: rgba(255, 255, 255, 0.98);
+        padding: 15px 0;
+      }
+
+      .navbar-brand {
+        color: var(--dark-color) !important;
+        letter-spacing: -0.5px;
+        line-height: 1;
+      }
+
+      .navbar-brand img {
+        transition: transform 0.3s ease;
+      }
+
+      .navbar-brand:hover img {
+        transform: rotate(-5deg) scale(1.05);
+      }
+
+      .nav-link {
+        font-weight: 500;
+        color: #444444 !important;
+        position: relative;
+        padding: 0.5rem 1rem !important;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 1rem;
+        background-color: var(--primary-color);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: calc(100% - 2rem);
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--primary-color) !important;
+      }
+
+      /* Hero Section Responsive Layout */
+      .hero {
+        background: linear-gradient(rgba(26, 26, 36, 0.75), rgba(41, 155, 245, 0.35)),
+          url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+        min-height: 85vh;
+        color: white;
+        display: flex;
+        align-items: center;
+        padding: 80px 0;
+      }
+
+      .hero h1 {
+        font-size: calc(2rem + 2vw);
+        /* Fluid responsive typography */
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: calc(1rem + 0.2vw);
+        opacity: 0.95;
+      }
+
+      /* Feature Cards Interactive Effects */
+      .feature-box {
+        padding: 40px 30px;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        top: 0;
+      }
+
+      .feature-box:hover {
+        top: -10px;
+        box-shadow: 0 20px 40px rgba(41, 155, 245, 0.12);
+        border-color: rgba(41, 155, 245, 0.2);
+      }
+
+      .icon-box {
+        width: 65px;
+        height: 65px;
+        background: rgba(41, 155, 245, 0.08);
+        color: var(--primary-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        margin-bottom: 25px;
+        transition: all 0.3s ease;
+      }
+
+      .feature-box:hover class-box,
+      .feature-box:hover .icon-box {
+        background: var(--primary-color);
+        color: #fff;
+        transform: scale(1.05);
+      }
+
+      /* Services Layout Style & Hover Animations */
+      .services-section {
+        background-color: #fff;
+        padding: 90px 0 50px 0;
+      }
+
+      .services-sub {
+        letter-spacing: 3px;
+        font-size: 0.85rem;
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      .services-main-title {
+        font-size: calc(1.8rem + 1.2vw);
+        font-weight: 500;
+        color: var(--dark-color);
+        margin-bottom: 60px;
+      }
+
+      .service-block {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 45px;
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+      }
+
+      .service-block:hover {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+        transform: translateY(-3px);
+      }
+
+      .service-icon-square {
+        width: 70px;
+        height: 70px;
+        background-color: var(--primary-color);
+        border-bottom: 5px solid var(--accent-yellow);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: var(--accent-yellow);
+        flex-shrink: 0;
+        margin-right: 20px;
+        box-shadow: 0 4px 12px rgba(41, 155, 245, 0.25);
+        transition: transform 0.3s ease;
+      }
+
+      .service-block:hover .service-icon-square {
+        transform: scale(1.08) rotate(3deg);
+      }
+
+      .service-content h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--dark-color);
+        margin-bottom: 10px;
+      }
+
+      .service-content p {
+        font-size: 0.92rem;
+        color: #6c757d;
+        line-height: 1.7;
+        margin-bottom: 15px;
+      }
+
+      .read-more-link {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--dark-color);
+        text-decoration: none;
+        letter-spacing: 1px;
+        border-bottom: 2px solid var(--dark-color);
+        padding-bottom: 2px;
+        text-transform: uppercase;
+        transition: all 0.2s ease;
+      }
+
+      .read-more-link:hover {
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+        padding-left: 5px;
+      }
+
+      /* Project Picture Gallery Responsive Zoom Design */
+      .project-section {
+        background-color: #fff;
+        padding: 50px 0 90px 0;
+      }
+
+      .project-sub {
+        letter-spacing: 3px;
+        font-size: 0.85rem;
+        color: var(--primary-color);
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .project-main-title {
+        font-size: calc(1.8rem + 1.2vw);
+        font-weight: 300;
+        color: var(--dark-color);
+        margin-bottom: 60px;
+      }
+
+      .project-img-card {
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 24px;
+        position: relative;
+        aspect-ratio: 1 / 1;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+      }
+
+      .project-img-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .project-img-card::after {
+        content: '\f00e';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(26, 26, 36, 0.5);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+
+      .project-img-card:hover img {
+        transform: scale(1.12);
+      }
+
+      .project-img-card:hover::after {
+        opacity: 1;
+      }
+
+      /* Team Cards Styles */
+      .team-section {
+        padding: 90px 0;
+        background-color: var(--light-bg);
+      }
+
+      .team-sub {
+        letter-spacing: 3px;
+        font-size: 0.85rem;
+        color: var(--primary-color);
+      }
+
+      .team-title {
+        font-size: calc(1.8rem + 1vw);
+        font-weight: 400;
+        color: var(--dark-color);
+        margin-bottom: 20px;
+      }
+
+      .btn-yellow {
+        background-color: var(--accent-yellow);
+        color: #000000;
+        font-weight: 600;
+        letter-spacing: 1px;
+        font-size: 0.8rem;
+        padding: 13px 28px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        border: none;
+        box-shadow: 0 4px 10px rgba(244, 234, 60, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .btn-yellow:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(244, 234, 60, 0.35);
+        background-color: #ebd926;
+      }
+
+      .team-card {
+        border: none;
+        background: none;
+        border-bottom: 4px solid var(--accent-yellow);
+        transition: transform 0.3s ease;
+      }
+
+      .team-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .team-img-wrapper {
+        height: 300px;
+        overflow: hidden;
+        border-radius: 8px 8px 0 0;
+      }
+
+      .team-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .team-info-box {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 25px 20px;
+        text-align: center;
+        border-radius: 0 0 8px 8px;
+      }
+
+      .team-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .team-role {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        opacity: 0.9;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      .team-socials {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .social-dot {
+        width: 34px;
+        height: 34px;
+        background-color: var(--accent-yellow);
+        color: var(--primary-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      .social-dot:hover {
+        transform: scale(1.15) rotate(10deg);
+        color: var(--secondary-color);
+      }
+
+      /* Testimonials Section Styles */
+      .happy-customer-section {
+        background-color: var(--testi-dark-bg);
+        padding: 95px 0;
+        color: #fff;
+      }
+
+      .testi-sub {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.85rem;
+        color: #a7a4ad;
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+
+      .testi-main-title {
+        font-size: calc(1.8rem + 1.2vw);
+        font-weight: 400;
+        color: #fff;
+        margin-bottom: 70px;
+      }
+
+      .customer-card {
+        background-color: var(--testi-card-blue);
+        border-radius: 8px;
+        padding: 40px 30px;
+        border: none;
+        border-bottom: 5px solid var(--accent-yellow);
+        position: relative;
+        text-align: left;
+        height: 100%;
+        transition: transform 0.3s ease;
+      }
+
+      .customer-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .customer-card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .customer-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 15px;
+        border: 2.5px solid rgba(255, 255, 255, 0.25);
+      }
+
+      .customer-meta h4 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 2px;
+        color: #fff;
+      }
+
+      .customer-meta span {
+        font-size: 0.85rem;
+        opacity: 0.9;
+      }
+
+      .quote-icon-right {
+        position: absolute;
+        top: 25px;
+        right: 30px;
+        font-size: 4rem;
+        color: var(--accent-yellow);
+        font-family: 'Georgia', serif;
+        line-height: 1;
+        font-weight: bold;
+        opacity: 0.85;
+      }
+
+      .customer-feedback {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: 0;
+      }
+
+      .carousel-dots-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 50px;
+      }
+
+      .dot-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .dot-indicator.active {
+        background-color: var(--accent-yellow);
+        transform: scale(1.2);
+      }
+
+      .dot-indicator.inactive {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Global UI Elements */
+      .btn-custom {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 12px 32px;
+        border-radius: 30px;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(41, 155, 245, 0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .btn-custom:hover {
+        background-color: var(--secondary-color);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 119, 182, 0.4);
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.25rem rgba(41, 155, 245, 0.15);
+      }
+
+      /* ACCURATE MATCHING IMAGE FOOTER STYLE */
+      .custom-image-footer {
+        background-color: var(--footer-bg);
+        color: var(--footer-text);
+        padding: 85px 0 40px 0;
+        font-size: 0.95rem;
+      }
+
+      .footer-column-heading {
+        color: var(--footer-heading);
+        font-size: 1.25rem;
+        font-weight: 600;
+        position: relative;
+        padding-bottom: 12px;
+        margin-bottom: 35px;
+        display: inline-block;
+      }
+
+      .footer-column-heading::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 35px;
+        height: 3px;
+        background-color: var(--accent-yellow);
+      }
+
+      .footer-desc-text {
+        line-height: 1.8;
+        margin-bottom: 30px;
+        color: #a0a0a0;
+      }
+
+      .footer-social-circles {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 15px;
+      }
+
+      .footer-social-circle-link {
+        width: 42px;
+        height: 42px;
+        background-color: #299bf5;
+        color: #ffffff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .footer-social-circle-link:hover {
+        transform: translateY(-3px) scale(1.05);
+        opacity: 0.95;
+        color: #ffffff;
+      }
+
+      .footer-links-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-links-list li {
+        margin-bottom: 14px;
+      }
+
+      .footer-links-list a {
+        color: var(--footer-text);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        display: inline-block;
+      }
+
+      .footer-links-list a:hover {
+        color: #ffffff;
+        transform: translateX(4px);
+      }
+
+      .footer-contact-row {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 22px;
+      }
+
+      .footer-contact-icon {
+        color: #6c757d;
+        font-size: 1.05rem;
+        width: 28px;
+        flex-shrink: 0;
+        margin-top: 3px;
+      }
+
+      .footer-contact-text {
+        color: var(--footer-text);
+        line-height: 1.6;
+        margin-bottom: 0;
+      }
+
+      /* Mobile Adjustments for Seamless UI Responsive Design */
+      @media (max-width: 991.98px) {
+        .navbar {
+          padding: 10px 0;
+        }
+
+        .navbar-nav {
+          background: #ffffff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+          margin-top: 15px;
+        }
+
+        .nav-link::after {
+          display: none;
+        }
+
+        .hero {
+          min-height: 60vh;
+        }
+
+        .team-section .text-start {
+          text-align: center !important;
+          margin-bottom: 40px;
+        }
+
+        .team-section .btn-yellow {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+    <!-- Header / Navbar with Company Logo -->
+    <!-- Header / Navbar with Matched Brand Colors -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <!-- Unified Brand Logo Image Asset Layer -->
+          <img src="1783075176240-Photoroom.png" style="height: 48px; width: auto; object-fit: contain;" alt="NACS Logo">
+          <span class="ms-2 brand-text">Facility Management</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a class="nav-link active" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#team">Team</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#testimonials">Clients</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center text-lg-start">
+            <h1 class="display-4 mb-3">Housekeeping Facility Solutions, Seamless Operations</h1>
+            <p class="lead mb-4">We provide premier corporate facility management and comprehensive infrastructure maintenance services tailored to your operational needs. Experience elite workplace efficiency today.</p>
+            <div class="d-flex gap-3 flex-wrap justify-content-center justify-content-lg-start">
+              <a href="#contact" class="btn btn-custom btn-lg">Book Service</a>
+              <a href="#services" class="btn btn-outline-light btn-lg rounded-pill px-4">Our Services</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Features / Key Points -->
+    <!-- Why Choose Us Section -->
+    <section id="about" class="why-choose-us py-5">
+      <div class="container text-center">
+        <span class="text-uppercase text-primary fw-bold" style="font-size: 0.9rem; letter-spacing: 1px;">Why Choose Us</span>
+        <h2 class="fw-bold text-dark mt-2 mb-3">The NACS Standard</h2>
+        <p class="text-muted mx-auto mb-5" style="max-width: 700px;"> We go beyond standard facility maintenance to ensure your commercial infrastructure is compliant, optimized, and tailored for peak workplace productivity. </p>
+        <div class="row g-4">
+          <!-- Card 1: Enterprise Compliance & Insurance -->
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-4 text-center custom-feature-card">
+              <div class="icon-wrapper mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px; background-color: #e6f4fe; border-radius: 50%;">
+                <i class="fa-solid fa-shield-halved text-primary" style="font-size: 1.8rem;"></i>
+              </div>
+              <h4 class="fw-bold mb-3" style="font-size: 1.25rem;">Compliance & Insurance</h4>
+              <p class="text-muted mb-0" style="font-size: 0.95rem; line-height: 1.6;"> Our complete workforce undergoes extensive background checks and rigorous corporate onboarding, operating under full institutional liability insurance. </p>
+            </div>
+          </div>
+          <!-- Card 2: Green & Sustainable FM -->
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-4 text-center custom-feature-card">
+              <div class="icon-wrapper mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px; background-color: #e6f4fe; border-radius: 50%;">
+                <i class="fa-solid fa-leaf text-primary" style="font-size: 1.8rem;"></i>
+              </div>
+              <h4 class="fw-bold mb-3" style="font-size: 1.25rem;">Sustainable Practice</h4>
+              <p class="text-muted mb-0" style="font-size: 0.95rem; line-height: 1.6;"> We implement eco-certified, non-toxic operational solutions that safeguard your indoor air quality, assets, and environmental corporate compliance benchmarks. </p>
+            </div>
+          </div>
+          <!-- Card 3: Custom SLA & Deployments -->
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-4 text-center custom-feature-card">
+              <div class="icon-wrapper mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px; background-color: #e6f4fe; border-radius: 50%;">
+                <i class="fa-solid fa-sliders text-primary" style="font-size: 1.8rem;"></i>
+              </div>
+              <h4 class="fw-bold mb-3" style="font-size: 1.25rem;">Custom SLA Scheduling</h4>
+              <p class="text-muted mb-0" style="font-size: 0.95rem; line-height: 1.6;"> We build custom Service Level Agreements around your active timelines, running 24/7 or after-hours deployments to prevent any workflow disruption. </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Visual Custom Services Section -->
+    <section id="services" class="services-section">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-12">
+            <span class="services-sub">SERVICES</span>
+            <h2 class="services-main-title">Where We Work</h2>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="service-block">
+              <div class="service-icon-square">
+                <i class="fa-solid fa-desktop"></i>
+              </div>
+              <div class="service-content">
+                <h3>Office Cleaning</h3>
+                <p>Enhance workplace productivity with our comprehensive commercial cleaning solutions, ensuring pristine workspaces, sanitized common zones, and pristine boardrooms.</p>
+                <!--<a href="#" class="read-more-link">Read More</a>-->
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="service-block">
+              <div class="service-icon-square">
+                <i class="fa-solid fa-kitchen-set"></i>
+              </div>
+              <div class="service-content">
+                <h3>Hotels Cleaning</h3>
+                <p>Maintain five-star hospitality standards with detailed housekeeping services, deep guestroom sanitization, lobby upkeep, and seamless turnaround scheduling.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="service-block">
+              <div class="service-icon-square">
+                <i class="fa-solid fa-hospital"></i>
+              </div>
+              <div class="service-content">
+                <h3>Hospital Cleaning</h3>
+                <p>Strict clinical-grade disinfection protocols designed for healthcare facilities, keeping patient rooms, surgical theaters, and clinics safe and pathogen-free.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="service-block">
+              <div class="service-icon-square">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+              <div class="service-content">
+                <h3>Shopping Malls</h3>
+                <p>High-frequency maintenance for busy retail corridors, including glass panel polishing, food court sanitation, and continuous restroom area maintenance.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="service-block">
+              <div class="service-icon-square">
+                <i class="fa-solid fa-photo-film"></i>
+              </div>
+              <div class="service-content">
+                <h3>Cinema Halls</h3>
+                <p>Rapid auditorium deep-cleaning cycles between movie screenings, alongside complete floor cleaning, carpet stain extraction, and concession lobby upkeep.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="service-block">
+              <div class="service-icon-square">
+                <i class="fa-solid fa-school"></i>
+              </div>
+              <div class="service-content">
+                <h3>Schools</h3>
+                <p>Fostering healthy educational spaces through eco-friendly surface sanitation across classrooms, crowded hallways, sports facilities, and school cafeterias.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- PROJECT PICTURE SECTION WITH HOVER EFFECTS -->
+    <section id="projects" class="project-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <span class="project-sub">Our Project</span>
+            <h2 class="project-main-title">We have done many latest cleaning projects</h2>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-xl-3 col-md-6 col-sm-6">
+            <div class="project-img-card">
+              <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=500&q=80" alt="Glass Polishing Service">
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 col-sm-6">
+            <div class="project-img-card">
+              <img src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?auto=format&fit=crop&w=500&q=80" alt="Janitorial Supplies">
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 col-sm-6">
+            <div class="project-img-card">
+              <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=500&q=80" alt="Home Deep Clean Crew">
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 col-sm-6">
+            <div class="project-img-card">
+              <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=500&q=80" alt="Bathroom Deep Clean">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Visual Dynamic Custom Team Section -->
+    <section id="team" class="team-section">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-xl-3 col-lg-4 text-start">
+            <span class="text-uppercase fw-bold team-sub">Team & Staff</span>
+            <h2 class="team-title">Our Team</h2>
+            <p class="text-muted mb-4" style="font-size: 0.95rem; line-height: 1.7;"> Our facility management experts and certified technicians are rigorously trained to maintain the highest corporate standards, delivering unmatched reliability and operational excellence to your property. </p>
+            <button class="btn btn-yellow">View All Staff</button>
+          </div>
+          <div class="col-xl-9 col-lg-8">
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="card team-card shadow-sm">
+                  <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Lloyd Wilson">
+                  </div>
+                  <div class="team-info-box">
+                    <h4 class="team-name">Mr. Udit Kumar</h4>
+                    <span class="team-role">Operations Head</span>
+                    <div class="team-socials">
+                      <a href="#" class="social-dot">
+                        <i class="fa-brands fa-twitter"></i>
+                      </a>
+                      <a href="#" class="social-dot">
+                        <i class="fa-brands fa-facebook-f"></i>
+                      </a>
+                      <a href="#" class="social-dot">
+                        <i class="fa-brands fa-instagram"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card team-card shadow-sm">
+                  <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Lloyd Wilson">
+                  </div>
+                  <div class="team-info-box">
+                    <h4 class="team-name">Mr. Dhiraj Singh</h4>
+                    <span class="team-role">Business Development & Finance /Operations</span>
+                    <div class="team-socials">
+                      <a href="#" class="social-dot">
+                        <i class="fa-brands fa-twitter"></i>
+                      </a>
+                      <a href="#" class="social-dot">
+                        <i class="fa-brands fa-facebook-f"></i>
+                      </a>
+                      <a href="#" class="social-dot">
+                        <i class="fa-brands fa-instagram"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card team-card shadow-sm">
+                  <div class="team-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Lloyd Wilson">
+                  </div>
+                  <div class="team-info-box">
+                    <h4 class="team-name">Mr. Nikhill Raj</h4>
+                    <span class="team-role">HR, Admin & Accounts</span>
+                    <div class="team-socials">
+                      <a href="#" class="social-dot">
+                        <i class="fa-brands fa-twitter"></i>
+                      </a>
+                      <a href="#" class="social-dot">
+                        <i class="fa-brands fa-facebook-f"></i>
+                      </a>
+                      <a href="#" class="social-dot">
+                        <i class="fa-brands fa-instagram"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Custom Happy Customer Section -->
+    <section id="testimonials" class="happy-customer-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="testi-main-title">Clients</h2>
+          </div>
+        </div>
+        <div class="row g-4 justify-content-center">
+          <div class="col-lg-4 col-md-6">
+            <div class="card customer-card">
+              <span class="quote-icon-right">”</span>
+              <div class="customer-card-header">
+                <div class="customer-meta">
+                  <h4>Hira Sweets</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="card customer-card">
+              <span class="quote-icon-right">”</span>
+              <div class="customer-card-header">
+                <div class="customer-meta">
+                  <h4>Goyal Sons</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-dots-container">
+          <span class="dot-indicator active"></span>
+          <span class="dot-indicator inactive"></span>
+        </div>
+      </div>
+    </section>
+    <!-- Booking / Contact Form Section -->
+    <section id="contact" class="py-5 bg-light">
+      <div class="container py-5">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-5">
+            <span class="text-uppercase text-primary fw-bold">Get In Touch</span>
+            <h2 class="fw-bold text-dark mt-2 mb-4">Request a Free Estimate</h2>
+            <p class="text-muted mb-4">Ready to optimize your commercial space? Send us your property details or service requirements, and our operations team will get back to you with a comprehensive custom service proposal.</p>
+            <div class="d-flex mb-3 align-items-center">
+              <div class="icon-box me-3 mb-0">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-0">Call Us Directly</h6>
+                <p class="mb-0 text-muted">+91 89207 57922</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="icon-box me-3 mb-0">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-0">Email Support</h6>
+                <p class="mb-0 text-muted">nacsfacilitymanagement@gmail.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- EXACT IMAGE-MATCHING FOOTER -->
+    <footer class="custom-image-footer">
+      <div class="container">
+        <div class="row g-4 justify-content-between">
+          <!-- Left Column -->
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-column-heading">NACS Facility Management</h3>
+            <p class="footer-desc-text"> Delivering comprehensive facility management, infrastructure maintenance, and professional corporate support services. We ensure your business environment operates smoothly, safely, and with peak structural efficiency. </p>
+            <div class="footer-social-circles mb-3">
+              <a href="#" class="footer-social-circle-link">
+                <i class="fa-brands fa-twitter"></i>
+              </a>
+              <a href="#" class="footer-social-circle-link">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="#" class="footer-social-circle-link">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+          <!-- Center Column -->
+          <div class="col-lg-3 col-md-6 ps-lg-5">
+            <h3 class="footer-column-heading">Quick Links</h3>
+            <ul class="footer-links-list">
+              <li>
+                <a href="#home">Home</a>
+              </li>
+              <li>
+                <a href="#about">About</a>
+              </li>
+              <li>
+                <a href="#services">Services</a>
+              </li>
+              <li>
+                <a href="#projects">Works</a>
+              </li>
+              <li>
+                <a href="#">Blog</a>
+              </li>
+              <li>
+                <a href="#contact">Contact</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Right Column -->
+          <div class="col-lg-4 col-md-6">
+            <h3 class="footer-column-heading">Have a Question?</h3>
+            <li class="d-flex mb-3 align-items-center">
+              <span class="footer-icon me-3">
+                <i class="fa-solid fa-file-invoice"></i>
+              </span>
+              <span class="footer-text">
+                <strong class="text-white me-1" style="font-size: 0.85rem;">GSTIN:</strong>
+                <span style="color: var(--accent-yellow); font-family: monospace; font-weight: 600;">07LSTPK2300R1ZY</span>
+              </span>
+            </li>
+            <div class="footer-contact-row">
+              <div class="footer-contact-icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <p class="footer-contact-text"> A-761-762, <br>DDA Colony Khayala, Tilak Nagar, New Delhi- 110018 </p>
+            </div>
+            <div class="footer-contact-row">
+              <div class="footer-contact-icon">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <p class="footer-contact-text">+91 63950 45919</p>
+            </div>
+            <div class="footer-contact-row">
+              <div class="footer-contact-icon">
+                <i class="fa-solid fa-paper-plane"></i>
+              </div>
+              <p class="footer-contact-text">nacsfacilitymanagement@gmail.com</p>
+            </div>
+          </div>
+        </div>
+        <!-- Custom Required Copyright Row Block -->
+        <div class="row mt-5 pt-4" style="border-top: 1px solid rgba(255,255,255,0.06);">
+          <div class="col-12 text-center text-md-start">
+            <p class="mb-0" style="color: rgba(255, 255, 255, 0.35); font-size: 0.88rem; letter-spacing: 0.5px;"> &copy; 2026 All rights reserved | NACS </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Bootstrap 5 Bundle with Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Interactions -->
+    <script>
+      // Smooth Sticky Navbar Transitions
+      window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 40) {
+          navbar.style.padding = "10px 0";
+          navbar.style.boxShadow = "0 10px 30px rgba(0,0,0,0.08)";
+        } else {
+          navbar.style.padding = "15px 0";
+          navbar.style.boxShadow = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
