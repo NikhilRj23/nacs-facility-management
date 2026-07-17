@@ -184,6 +184,60 @@
         transition: all 0.3s ease;
       }
 
+      /* Team Card Image Wrapper Config */
+      .team-img-container {
+        width: 100%;
+        height: 320px;
+        /* Saare images ki height is frame me lock ho jayegi */
+        overflow: hidden;
+        position: relative;
+      }
+
+      .team-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Image stretch nahi hogi aur container fit karegi */
+        object-position: top center;
+        /* Isse face center aur top layout alignment sahi rahegi */
+      }
+
+      /* Card layout fix for equal heights */
+      .team-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .team-info-box {
+        flex-grow: 1;
+        padding: 20px 15px;
+      }
+
+      /* Replacing dark blue with signature light blue #299bf5 */
+      .team-card .team-info-box.bg-primary {
+        background-color: #299bf5 !important;
+      }
+
+      /* Custom adjustment for white rounded icons matching the bright blue vibe */
+      .team-info-box .btn-light {
+        background-color: #ffffff !important;
+        border: none !important;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+
+      .team-info-box .btn-light i {
+        color: #299bf5 !important;
+        /* Icon paths match the card background */
+      }
+
+      .team-info-box .btn-light:hover {
+        transform: scale(1.1);
+        background-color: #f0f8ff !important;
+      }
+
       .feature-box:hover class-box,
       .feature-box:hover .icon-box {
         background: var(--primary-color);
@@ -945,68 +999,71 @@
             <button class="btn btn-yellow">View All Staff</button>
           </div>
           <div class="col-xl-9 col-lg-8">
-            <div class="row g-4">
+            <div class="row g-4 flex-grow-1">
+              <!-- Member 1: Mr. Udit Kumar -->
               <div class="col-md-4">
-                <div class="card team-card shadow-sm">
-                  <div class="team-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Lloyd Wilson">
+                <div class="card border-0 shadow-sm team-card">
+                  <div class="team-img-container">
+                    <img src="udit_kumar.jpeg" alt="Mr. Udit Kumar">
                   </div>
-                  <div class="team-info-box">
-                    <h4 class="team-name">Mr. Udit Kumar</h4>
-                    <span class="team-role">Operations Head</span>
-                    <div class="team-socials">
-                      <a href="#" class="social-dot">
-                        <i class="fa-brands fa-twitter"></i>
+                  <div class="bg-primary text-white text-center team-info-box">
+                    <h4 class="fw-bold mb-1" style="font-size: 1.2rem;">Mr. Udit Kumar</h4>
+                    <p class="text-uppercase small mb-3" style="letter-spacing: 1px; opacity: 0.9; font-size: 0.75rem;">Operations Head</p>
+                    <div class="d-flex justify-content-center gap-2">
+                      <a href="#" class="btn btn-sm btn-light rounded-circle" style="width:32px; height:32px; padding:0; display:flex; align-items:center; justify-content:center;">
+                        <i class="fa-brands fa-twitter text-primary"></i>
                       </a>
-                      <a href="#" class="social-dot">
-                        <i class="fa-brands fa-facebook-f"></i>
+                      <a href="#" class="btn btn-sm btn-light rounded-circle" style="width:32px; height:32px; padding:0; display:flex; align-items:center; justify-content:center;">
+                        <i class="fa-brands fa-facebook-f text-primary"></i>
                       </a>
-                      <a href="#" class="social-dot">
-                        <i class="fa-brands fa-instagram"></i>
+                      <a href="#" class="btn btn-sm btn-light rounded-circle" style="width:32px; height:32px; padding:0; display:flex; align-items:center; justify-content:center;">
+                        <i class="fa-brands fa-instagram text-primary"></i>
                       </a>
                     </div>
                   </div>
                 </div>
               </div>
+              <!-- Member 2: Mr. Dhiraj Singh -->
               <div class="col-md-4">
-                <div class="card team-card shadow-sm">
-                  <div class="team-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Lloyd Wilson">
+                <div class="card border-0 shadow-sm team-card">
+                  <div class="team-img-container">
+                    <img src="udit_kumar.jpeg" alt="Mr. Dhiraj Singh">
                   </div>
-                  <div class="team-info-box">
-                    <h4 class="team-name">Mr. Dhiraj Singh</h4>
-                    <span class="team-role">Business Development & Finance /Operations</span>
-                    <div class="team-socials">
-                      <a href="#" class="social-dot">
-                        <i class="fa-brands fa-twitter"></i>
+                  <div class="bg-primary text-white text-center team-info-box">
+                    <h4 class="fw-bold mb-1" style="font-size: 1.2rem;">Mr. Dhiraj Singh</h4>
+                    <p class="text-uppercase small mb-3" style="letter-spacing: 1px; opacity: 0.9; font-size: 0.75rem;">Business Development & Finance / Operations</p>
+                    <div class="d-flex justify-content-center gap-2">
+                      <a href="#" class="btn btn-sm btn-light rounded-circle" style="width:32px; height:32px; padding:0; display:flex; align-items:center; justify-content:center;">
+                        <i class="fa-brands fa-twitter text-primary"></i>
                       </a>
-                      <a href="#" class="social-dot">
-                        <i class="fa-brands fa-facebook-f"></i>
+                      <a href="#" class="btn btn-sm btn-light rounded-circle" style="width:32px; height:32px; padding:0; display:flex; align-items:center; justify-content:center;">
+                        <i class="fa-brands fa-facebook-f text-primary"></i>
                       </a>
-                      <a href="#" class="social-dot">
-                        <i class="fa-brands fa-instagram"></i>
+                      <a href="#" class="btn btn-sm btn-light rounded-circle" style="width:32px; height:32px; padding:0; display:flex; align-items:center; justify-content:center;">
+                        <i class="fa-brands fa-instagram text-primary"></i>
                       </a>
                     </div>
                   </div>
                 </div>
               </div>
+              <!-- Member 3: Mr. Nikhil Raj -->
               <div class="col-md-4">
-                <div class="card team-card shadow-sm">
-                  <div class="team-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Lloyd Wilson">
+                <div class="card border-0 shadow-sm team-card">
+                  <div class="team-img-container">
+                    <img src="udit_kumar.jpeg" alt="Mr. Nikhil Raj">
                   </div>
-                  <div class="team-info-box">
-                    <h4 class="team-name">Mr. Nikhill Raj</h4>
-                    <span class="team-role">HR, Admin & Accounts</span>
-                    <div class="team-socials">
-                      <a href="#" class="social-dot">
-                        <i class="fa-brands fa-twitter"></i>
+                  <div class="bg-primary text-white text-center team-info-box">
+                    <h4 class="fw-bold mb-1" style="font-size: 1.2rem;">Mr. Nikhil Raj</h4>
+                    <p class="text-uppercase small mb-3" style="letter-spacing: 1px; opacity: 0.9; font-size: 0.75rem;">HR, Admin & Accounts</p>
+                    <div class="d-flex justify-content-center gap-2">
+                      <a href="#" class="btn btn-sm btn-light rounded-circle" style="width:32px; height:32px; padding:0; display:flex; align-items:center; justify-content:center;">
+                        <i class="fa-brands fa-twitter text-primary"></i>
                       </a>
-                      <a href="#" class="social-dot">
-                        <i class="fa-brands fa-facebook-f"></i>
+                      <a href="#" class="btn btn-sm btn-light rounded-circle" style="width:32px; height:32px; padding:0; display:flex; align-items:center; justify-content:center;">
+                        <i class="fa-brands fa-facebook-f text-primary"></i>
                       </a>
-                      <a href="#" class="social-dot">
-                        <i class="fa-brands fa-instagram"></i>
+                      <a href="#" class="btn btn-sm btn-light rounded-circle" style="width:32px; height:32px; padding:0; display:flex; align-items:center; justify-content:center;">
+                        <i class="fa-brands fa-instagram text-primary"></i>
                       </a>
                     </div>
                   </div>
@@ -1015,7 +1072,6 @@
             </div>
           </div>
         </div>
-      </div>
     </section>
     <!-- Custom Happy Customer Section -->
     <section id="testimonials" class="happy-customer-section text-center">
